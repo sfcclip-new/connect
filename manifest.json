@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "github.com/labstack/echo": {
+      "branch": "master"
+    },
+    "github.com/sirupsen/logrus": {
+      "branch": "master"
+    },
+    "github.com/speps/go-hashids": {
+      "branch": "master"
+    },
+    "github.com/go-xorm/xorm": {
+      "branch": "master"
+    },
+    "github.com/mattn/go-sqlite3": {
+      "branch": "master"
+    }
+  }
+}

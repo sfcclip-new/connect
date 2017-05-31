@@ -1,0 +1,110 @@
+{
+    "memo": "96029f0c9d5ab02c1f090d0d8da7d7a32c11ad607ddaefdbf9b77b3cabfd3949",
+    "projects": [
+        {
+            "name": "github.com/go-xorm/builder",
+            "branch": "master",
+            "revision": "c8871c857d2555fbfbd8524f895be5386d3d8836",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/go-xorm/core",
+            "version": "v0.5.6",
+            "revision": "5bf745d7d163f4380e6c2bba8c4afa60534dd087",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/go-xorm/xorm",
+            "version": "v0.6.2",
+            "revision": "3c8314e91603f0bfa6a228c1a0fea8a9e298f6d9",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/labstack/echo",
+            "branch": "master",
+            "revision": "466d509e34e07d1313fdb152a11243ae9df10b5c",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/labstack/gommon",
+            "version": "v0.2.1",
+            "revision": "1121fd3e243c202482226a7afe4dcd07ffc4139a",
+            "packages": [
+                "color",
+                "log"
+            ]
+        },
+        {
+            "name": "github.com/mattn/go-colorable",
+            "version": "v0.0.7",
+            "revision": "d228849504861217f796da67fae4f6e347643f15",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/mattn/go-isatty",
+            "version": "v0.0.2",
+            "revision": "fc9e8d8ef48496124e79ae0df75490096eccf6fe",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/sirupsen/logrus",
+            "branch": "master",
+            "revision": "5e5dc898656f695e2a086b8e12559febbfc01562",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/speps/go-hashids",
+            "branch": "master",
+            "revision": "2aa1a76a4e7c76dbe7d39f40661ab0261d70153a",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/valyala/bytebufferpool",
+            "branch": "master",
+            "revision": "e746df99fe4a3986f4d4f79e13c1e0117ce9c2f7",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/valyala/fasttemplate",
+            "branch": "master",
+            "revision": "dcecefd839c4193db0d35b88ec65b4c12d360ab0",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "golang.org/x/crypto",
+            "branch": "master",
+            "revision": "7e9105388ebff089b3f99f0ef676ea55a6da3a7e",
+            "packages": [
+                "acme/autocert"
+            ]
+        },
+        {
+            "name": "golang.org/x/sys",
+            "branch": "master",
+            "revision": "b90f89a1e7a9c1f6b918820b3daa7f08488c8594",
+            "packages": [
+                "unix"
+            ]
+        }
+    ]
+}

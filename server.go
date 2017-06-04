@@ -35,6 +35,7 @@ func NewServer(port string, db DatabaseType, production bool) *Server {
 	e.HideBanner = true
 	server := &Server{port, db, e}
 
+	e.Static("/console", "console")
 	e.GET("/unit", server.handleUnit)
 	e.GET("/unit/:id", server.handleUnit)
 	e.GET("/group", server.handleGroup)

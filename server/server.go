@@ -3,16 +3,20 @@ package server
 import (
 	"fmt"
 	"net/http"
+	"os"
 	"strconv"
 
 	"github.com/akkyie/connect.sfcclip.net/model"
 	"github.com/akkyie/connect.sfcclip.net/resource"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/go-xorm/core"
 	"github.com/go-xorm/xorm"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
+	"github.com/joho/godotenv"
 	"github.com/manyminds/api2go"
 	"github.com/manyminds/api2go-adapter/gorillamux"
+	_ "github.com/mattn/go-sqlite3"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -23,10 +27,30 @@ type Server struct {
 }
 
 // NewServer returns a new server
-func NewServer() (*Server, error) {
-	orm, err := xorm.NewEngine("sqlite3", "./test.db")
-	if err != nil {
-		panic(err)
+func NewServer(production bool) (*Server, error) {
+	var (
+		orm *xorm.Engine
+		err error
+	)
+	if production {
+		if err = godotenv.Load(); err != nil {
+			return nil, err
+		}
+
+		user := os.Getenv("MYSQL_USER")
+		password := os.Getenv("MYSQL_PASSWORD")
+		host := os.Getenv("MYSQL_HOST")
+		database := os.Getenv("MYSQL_DATABASE")
+
+		orm, err = xorm.NewEngine("mysql", fmt.Sprintf("%s:%s@%s/%s", user, password, host, database))
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		orm, err = xorm.NewEngine("sqlite3", "./test.db")
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	orm.ShowSQL(true)
@@ -57,16 +81,16 @@ func NewServer() (*Server, error) {
 
 	api.AddResource(model.Unit{}, resource.NewUnitResource(orm))
 	if err := orm.Sync(model.Unit{}); err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	api.AddResource(model.Group{}, resource.NewGroupResource(orm))
 	if err := orm.Sync(model.Group{}); err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	if err := orm.Sync(model.Record{}); err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	return &Server{

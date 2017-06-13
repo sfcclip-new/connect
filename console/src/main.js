@@ -1,16 +1,19 @@
 import Vue from 'vue'
-import App from './App.vue'
-import Group from './Group.vue'
 import VueRouter from 'vue-router'
 import Vuetify from 'vuetify'
+import axios from 'axios';
+
+import App from './components/App.vue'
+import Unit from './components/Unit.vue'
+import Group from './components/Group.vue'
 
 Vue.use(VueRouter)
 Vue.use(Vuetify)
 
 const router = new VueRouter({
   routes: [
-    { path: '/group', component: Group },
-    { path: '/group/:id', component: Group },
+    { path: '/unit/:id?', component: Unit, props: true },
+    { path: '/group/:id?', component: Group, props: true },
   ]
 })
 

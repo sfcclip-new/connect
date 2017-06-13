@@ -1,22 +1,23 @@
 <template>
   <v-app>
     <v-navigation-drawer persistent light v-model="drawer">
-      <v-list　subheader>
+      <v-list subheader>
 
         <v-subheader>ユニット</v-subheader>
-        <v-list-item v-for="unit in units" :key="unit.ID">
-          <v-list-tile avatar>
+        <v-list-item v-for="unit in units" :key="unit.id">
+          <v-list-tile avatar @click.native.stop="$router.push(`/unit/${unit.id}`)">
             <v-list-tile-avatar>
               <v-icon>list</v-icon>
             </v-list-tile-avatar>
             <v-list-tile-content>
-              <v-list-tile-title v-text="unit.ID"></v-list-tile-title>
+              <v-list-tile-title v-text="unit.id"></v-list-tile-title>
+              <v-list-tile-sub-title v-html="unit.attributes.name"></v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
         </v-list-item>
 
         <v-list-item>
-          <v-list-tile avatar>
+          <v-list-tile avatar @click.native.stop="$router.push('/unit')">
             <v-list-tile-avatar>
               <v-icon>add</v-icon>
             </v-list-tile-avatar>
@@ -29,13 +30,14 @@
         <v-divider />
 
         <v-subheader>グループ</v-subheader>
-        <v-list-item v-for="group in groups" :key="group.ID">
-          <v-list-tile avatar @click.native.stop="$router.push(`/group/${group.ID}`)">
+        <v-list-item v-for="group in groups" :key="group.id">
+          <v-list-tile avatar @click.native.stop="$router.push(`/group/${group.id}`)">
             <v-list-tile-avatar>
               <v-icon>list</v-icon>
             </v-list-tile-avatar>
             <v-list-tile-content>
-              <v-list-tile-title v-text="group.ID"></v-list-tile-title>
+              <v-list-tile-title v-text="group.id"></v-list-tile-title>
+              <v-list-tile-sub-title v-html="group.attributes.name"></v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
         </v-list-item>
@@ -74,14 +76,15 @@
     </v-toolbar>
     <main>
       <v-container fluid>
-        <router-view></router-view>
+        <router-view :units="units" @update="reload"></router-view>
       </v-container>
     </main>
   </v-app>
 </template>
 
 <script>
-import axios from 'axios';
+import api from '../api'
+import { Group, Unit } from '../models'
 
 export default {
   data () {
@@ -93,17 +96,27 @@ export default {
     }
   },
   created () {
-    axios.get('/unit')
-    .then(res => this.units = res.data || [])
-    .catch(err => console.error(err));
-
-    axios.get('/group')
-    .then(res => this.groups = res.data || [])
-    .catch(err => console.error(err));
+    this.reload()
   },
+  methods: {
+    reload () {
+      api.get('/units')
+      .then(res => this.units = Unit.list(res.data) || [])
+      .catch(err => console.error(err));
+
+      api.get('/groups')
+      .then(res => this.groups = Group.list(res.data) || [])
+      .catch(err => console.error(err));
+    }
+  },
+  events: {
+    updated() {
+      this.reload()
+    }
+  }
 }
 </script>
 
 <style lang="stylus">
-@import './stylus/main'
+@import '../stylus/main'
 </style>

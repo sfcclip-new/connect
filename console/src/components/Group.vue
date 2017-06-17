@@ -8,7 +8,7 @@
       <v-list v-if="group.id" two-line>
         <template v-for="unit in relatedUnits" :keys="unit.id">
           <v-list-item>
-          <v-divider />
+            <v-divider />
             <v-list-tile @click.native.stop="removeUnit(unit)">
               <v-list-tile-content>
                 <v-list-tile-title v-html="unit.id" />
@@ -68,9 +68,7 @@ export default {
     },
     unrelatedUnits () {
       const unrelatedUnits = this.units
-      .filter(unit => !this.group.units
-        .map(u => u.id)
-        .includes(unit.id));
+      .filter(unit => !this.group.units.map(u => u.id).includes(unit.id));
       return unrelatedUnits;
     }
   },

@@ -55,6 +55,20 @@
 
         <v-divider />
 
+        <v-subheader>レコード</v-subheader>
+        <v-list-item>
+          <v-list-tile avatar @click.native.stop="$router.push('/record')">
+            <v-list-tile-avatar>
+              <v-icon>list</v-icon>
+            </v-list-tile-avatar>
+            <v-list-tile-content>
+              <v-list-tile-title>レコード一覧</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-list-item>
+
+        <v-divider />
+
         <v-subheader>メニュー</v-subheader>
         <v-list-item>
           <v-list-tile avatar @click.native.stop="drawer = !drawer">

@@ -93,6 +93,7 @@ func NewServer(production bool) (*Server, error) {
 		return nil, err
 	}
 
+	api.AddResource(model.Record{}, resource.NewRecordResource(orm))
 	if err := orm.Sync(model.Record{}); err != nil {
 		return nil, err
 	}

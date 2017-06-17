@@ -2,6 +2,7 @@ package model
 
 import (
 	"net/http"
+	"strconv"
 	"time"
 )
 
@@ -20,14 +21,14 @@ const (
 type Record struct {
 	ID int64 `json:"-" xorm:"pk autoincr"`
 
-	UnitID     int64      `xorm:"notnull"`
-	AccessType AccessType `xorm:"notnull"`
+	UnitID     int64      `json:"unit_id" xorm:"notnull"`
+	AccessType AccessType `json:"access_type" xorm:"notnull"`
 
-	Host       string
-	RemoteAddr string
-	RequestURI string
-	UserAgent  string
-	Referer    string
+	Host       string `json:"host"`
+	RemoteAddr string `json:"remote_addr"`
+	RequestURI string `json:"request_uri"`
+	UserAgent  string `json:"user_agent"`
+	Referer    string `json:"referer"`
 
 	CreatedAt time.Time `json:"created_at" xorm:"created"`
 }
@@ -43,4 +44,9 @@ func NewRecord(unitID int64, accessType AccessType, r *http.Request) *Record {
 	record.UserAgent = r.UserAgent()
 	record.Referer = r.Referer()
 	return record
+}
+
+// GetID to satisfy jsonapi.MarshalIdentifier interface
+func (r Record) GetID() string {
+	return strconv.FormatInt(r.ID, 10)
 }

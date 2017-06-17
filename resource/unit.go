@@ -8,7 +8,6 @@ import (
 	"github.com/akkyie/connect.sfcclip.net/model"
 	"github.com/go-xorm/xorm"
 	"github.com/manyminds/api2go"
-	log "github.com/sirupsen/logrus"
 )
 
 // UnitResource provides routing for units
@@ -68,7 +67,6 @@ func (r UnitResource) Create(obj interface{}, req api2go.Request) (api2go.Respon
 	if _, err := r.orm.Insert(&unit); err != nil {
 		return &Response{}, err
 	}
-	log.Info(unit)
 	return &Response{Res: unit, Code: http.StatusCreated}, nil
 }
 

@@ -8,7 +8,6 @@ import (
 	"github.com/akkyie/connect.sfcclip.net/model"
 	"github.com/go-xorm/xorm"
 	"github.com/manyminds/api2go"
-	log "github.com/sirupsen/logrus"
 )
 
 // GroupResource provides routing for groups
@@ -28,7 +27,6 @@ func (r GroupResource) FindAll(req api2go.Request) (api2go.Responder, error) {
 		return &Response{}, err
 	}
 
-	log.Info("FindAll", groups)
 	for key, group := range groups {
 		if len(group.UnitIDs) == 0 {
 			continue
@@ -74,7 +72,6 @@ func (r GroupResource) Create(obj interface{}, req api2go.Request) (api2go.Respo
 	if _, err := r.orm.Insert(&group); err != nil {
 		return &Response{}, err
 	}
-	log.Info(group)
 	return &Response{Res: group, Code: http.StatusCreated}, nil
 }
 

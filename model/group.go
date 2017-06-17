@@ -5,7 +5,6 @@ import (
 	"time"
 
 	"github.com/manyminds/api2go/jsonapi"
-	log "github.com/sirupsen/logrus"
 )
 
 // Group represents an group of multiple units
@@ -43,7 +42,6 @@ func (g Group) GetReferences() []jsonapi.Reference {
 
 // GetReferencedIDs to satisfy the jsonapi.MarshalLinkedRelations interface
 func (g Group) GetReferencedIDs() []jsonapi.ReferenceID {
-	log.Info("GetReferencedIDs", g)
 	results := []jsonapi.ReferenceID{}
 	for _, unitID := range g.UnitIDs {
 		results = append(results, jsonapi.ReferenceID{
@@ -52,18 +50,15 @@ func (g Group) GetReferencedIDs() []jsonapi.ReferenceID {
 			Name: "units",
 		})
 	}
-	log.Info("GetReferencedIDs", results)
 	return results
 }
 
 // GetReferencedStructs to satisfy the jsonapi.MarhsalIncludedRelations interface
 func (g Group) GetReferencedStructs() []jsonapi.MarshalIdentifier {
-	log.Info("GetReferencedStructs", g)
 	result := []jsonapi.MarshalIdentifier{}
 	for key := range g.Units {
 		result = append(result, g.Units[key])
 	}
-	log.Info("GetReferencedStructs", result)
 	return result
 }
 

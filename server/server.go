@@ -8,7 +8,6 @@ import (
 
 	"github.com/akkyie/connect.sfcclip.net/model"
 	"github.com/akkyie/connect.sfcclip.net/resource"
-	_ "github.com/go-sql-driver/mysql"
 	"github.com/go-xorm/core"
 	"github.com/go-xorm/xorm"
 	"github.com/gorilla/handlers"
@@ -16,8 +15,13 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/manyminds/api2go"
 	"github.com/manyminds/api2go-adapter/gorillamux"
-	_ "github.com/mattn/go-sqlite3"
 	log "github.com/sirupsen/logrus"
+
+	// allow xorm to use sqlite3 adapter
+	_ "github.com/mattn/go-sqlite3"
+
+	// allow xorm to use mysql adapter
+	_ "github.com/go-sql-driver/mysql"
 )
 
 // Server handles http requests

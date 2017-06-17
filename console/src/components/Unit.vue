@@ -1,11 +1,14 @@
 <template>
   <v-container fluid>
-    <v-text-field v-if="unit.id" name="id" label="ユニットID"  v-model="unit.id" readonly></v-text-field>
+    <v-text-field v-if="unit.id" name="id" label="ユニットID"  v-model="unit.id" disabled></v-text-field>
     <v-text-field name="name" label="ユニット名" v-model="unit.attributes.name"></v-text-field>
 
     <v-text-field name="advertizer" label="出稿元" v-model="unit.attributes.advertizer"></v-text-field>
     <v-text-field name="image_url" label="画像URL" v-model="unit.attributes.imageURL"></v-text-field>
     <v-text-field name="target_url" label="遷移先URL" v-model="unit.attributes.targetURL"></v-text-field>
+
+    <v-text-field name="image_count" label="表示回数" v-model="unit.attributes.image_count" disabled></v-text-field>
+    <v-text-field name="open_count" label="遷移回数" v-model="unit.attributes.open_count" disabled></v-text-field>
 
     <v-btn outline primary @click.native.stop="send">登録</v-btn>
     <v-btn v-if="unit.id" outline error @click.native.stop="remove">削除</v-btn>

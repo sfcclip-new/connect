@@ -14,8 +14,8 @@ type Unit struct {
 	ImageURL   string `json:"imageURL"`
 	TargetURL  string `json:"targetURL"`
 
-	ImageCount int64 `json:"-" xorm:"'image_count'"`
-	OpenCount  int64 `json:"-" xorm:"'open_count'"`
+	ImageCount int64 `json:"image_count"`
+	OpenCount  int64 `json:"open_count"`
 
 	CreatedAt time.Time `json:"created_at" xorm:"created"`
 	UpdatedAt time.Time `json:"updated_at" xorm:"updated"`

@@ -226,21 +226,21 @@ func recordAccess(orm *xorm.Engine, unit model.Unit, accessType model.AccessType
 		return
 	}
 
-	if accessType == model.ImageAccessType {
-		var (
-			count int64
-			err   error
-		)
+	count, err := orm.Where("unit_id = ?", unit.ID).And("access_type = ?", accessType).Count(new(model.Record))
+	if err != nil {
+		log.Fatal(err)
+		return
+	}
 
-		if count, err = orm.Where("unit_id = ?", unit.ID).Count(new(model.Record)); err != nil {
-			log.Fatal(err)
-			return
-		}
+	switch accessType {
+	case model.ImageAccessType:
+		unit.ImageCount = count
+	case model.OpenAccessType:
+		unit.OpenCount = count
+	}
 
-		unit.ImageAccessCount = count + 1
-		if _, err := orm.ID(unit.ID).Update(unit); err != nil {
-			log.Fatal(err)
-			return
-		}
+	if _, err := orm.ID(unit.ID).Update(unit); err != nil {
+		log.Fatal(err)
+		return
 	}
 }

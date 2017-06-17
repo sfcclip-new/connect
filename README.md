@@ -30,22 +30,23 @@ Built for SFC CLIP.
 # Development
 
 ```sh
-cd console
-npm install
-npm run dev
-cd ..
+npm --prefix console install
+npm --prefix console run dev
 
+dep ensure -update
 go run main.go
 ```
 
 # Build and run
 
-```sh
-cd console
-npm install
-npm run build
-cd ..
+- `.env.sample`をコピーして`.env`を作る
+- `.env`の認証情報を適宜編集
 
+```sh
+npm --prefix console install
+npm --prefix console run build
+
+dep ensure -update
 go build -o connect .
 ./connect --port=PORT --production=1
 ```

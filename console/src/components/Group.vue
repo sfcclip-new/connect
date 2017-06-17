@@ -3,20 +3,22 @@
     <v-text-field v-if="group.id" name="id" label="グループID" v-model="group.id" readonly />
     <v-text-field name="name" label="グループ名" v-model="group.attributes.name" />
 
-    <v-subheader v-if="group.id">含まれるユニット</v-subheader>
-    <v-list v-if="group.id" two-line>
-      <template v-for="unit in relatedUnits" :keys="unit.id">
-        <v-list-item>
-          <v-list-tile @click.native.stop="removeUnit(unit)">
-            <v-list-tile-content>
-              <v-list-tile-title v-html="unit.id" />
-              <v-list-tile-sub-title v-html="unit.attributes.name"></v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
-        </v-list-item>
-        <v-divider />
-      </template>
-    </v-list>
+    <v-card>
+      <v-subheader v-if="group.id">含まれるユニット</v-subheader>
+      <v-list v-if="group.id" two-line>
+        <template v-for="unit in relatedUnits" :keys="unit.id">
+          <v-list-item>
+          <v-divider />
+            <v-list-tile @click.native.stop="removeUnit(unit)">
+              <v-list-tile-content>
+                <v-list-tile-title v-html="unit.id" />
+                <v-list-tile-sub-title v-html="unit.attributes.name"></v-list-tile-sub-title>
+              </v-list-tile-content>
+            </v-list-tile>
+          </v-list-item>
+        </template>
+      </v-list>
+    </v-card>
 
     <v-container fluid>
       <v-layout row wrap>

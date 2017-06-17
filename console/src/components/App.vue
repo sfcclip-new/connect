@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-navigation-drawer persistent light v-model="drawer">
+    <v-navigation-drawer temporary light v-model="drawer">
       <v-list subheader>
 
         <v-subheader>ユニット</v-subheader>

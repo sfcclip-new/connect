@@ -39,7 +39,11 @@ func NewRecord(unitID int64, accessType AccessType, r *http.Request) *Record {
 	record.UnitID = unitID
 	record.AccessType = accessType
 	record.Host = r.Host
-	record.RemoteAddr = r.RemoteAddr
+	if realIP := r.Header.Get("X-Real-IP"); len(realIP) != 0 {
+		record.RemoteAddr = r.Header.Get("X-Real-IP")
+	} else {
+		record.RemoteAddr = r.RemoteAddr
+	}
 	record.RequestURI = r.RequestURI
 	record.UserAgent = r.UserAgent()
 	record.Referer = r.Referer()
